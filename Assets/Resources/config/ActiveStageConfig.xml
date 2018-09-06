@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Config>
+     <item ID="1" Type="1" PlayerLevelCond="20" StageID="4001" PlayerLevelSuggestion="20" />
+</Config>
