@@ -1,24 +1,11 @@
 ﻿using System;
 using System.Xml;
 using System.Collections.Generic;
-using UnityEngine;
-
 
 namespace ClientLogic
 {
-    public class GameConfigMgr
+    public class GameConfigMgr :Singleton<GameConfigMgr>
     {
-        private static GameConfigMgr _instance;
-        public static GameConfigMgr Instance
-        {
-            get
-            {
-                if (_instance == null)
-                    _instance = new GameConfigMgr();
-                return _instance;
-            }
-        }
-
         private Dictionary<string, Type> _dictAllCfgType = new Dictionary<string, Type>();
         public void Init()
         {
@@ -32,7 +19,7 @@ namespace ClientLogic
                     XmlDocument doc = GameResMgr.Instance.LoadXml(xmlName);
                     if (doc == null)
                     {
-                        Debug.LogError("[Config name:" + xmlName + " can't find!!!]");
+                        Logger.LogError("[GameConfigMgr.Init() => Config name:" + xmlName + " can't find!!!]");
                         continue;
                     }
                     XmlNode node = doc.SelectSingleNode("Config");
@@ -40,7 +27,7 @@ namespace ClientLogic
                 }
                 catch (Exception ex)
                 {
-                    Debug.LogError("[parse configs error, ex:" + ex + "]");
+                    Logger.LogError("[GameConfigMgr.Init() => parse configs error, ex:" + ex + "]");
                 }
             }
         }

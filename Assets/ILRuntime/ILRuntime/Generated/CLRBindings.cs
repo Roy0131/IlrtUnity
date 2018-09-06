@@ -26,17 +26,32 @@ namespace ILRuntime.Runtime.Generated
             System_Object_Binding.Register(app);
             GameResMgr_Binding.Register(app);
             System_String_Binding.Register(app);
-            UnityEngine_Debug_Binding.Register(app);
+            Logger_Binding.Register(app);
             System_Type_Binding.Register(app);
             System_Reflection_MethodBase_Binding.Register(app);
             System_Reflection_FieldInfo_Binding.Register(app);
+            System_Diagnostics_Stopwatch_Binding.Register(app);
+            UnityEngine_SceneManagement_SceneManager_Binding.Register(app);
+            UnityEngine_SceneManagement_Scene_Binding.Register(app);
+            UnityEngine_AsyncOperation_Binding.Register(app);
+            System_Array_Binding.Register(app);
             UnityEngine_GameObject_Binding.Register(app);
             UnityEngine_Object_Binding.Register(app);
-            UnityEngine_Transform_Binding.Register(app);
+            ObjectHelper_Binding.Register(app);
+            System_Collections_Generic_Dictionary_2_Int32_List_1_Int32_Binding.Register(app);
+            UnityEngine_Screen_Binding.Register(app);
             UnityEngine_Component_Binding.Register(app);
+            UnityEngine_UI_CanvasScaler_Binding.Register(app);
+            UnityEngine_Vector2_Binding.Register(app);
+            System_Collections_Generic_List_1_Int32_Binding.Register(app);
+            System_Collections_Generic_Dictionary_2_Int32_ILTypeInstance_Binding_ValueCollection_Binding.Register(app);
+            System_Collections_Generic_Dictionary_2_Int32_ILTypeInstance_Binding_ValueCollection_Binding_Enumerator_Binding.Register(app);
+            System_Collections_Generic_List_1_ILTypeInstance_Binding.Register(app);
+            UnityEngine_UI_Text_Binding.Register(app);
             UnityEngine_UI_Button_Binding.Register(app);
             UnityEventHelper_Binding.Register(app);
-            System_Diagnostics_Stopwatch_Binding.Register(app);
+            UnityEngine_UI_InputField_Binding.Register(app);
+            System_Activator_Binding.Register(app);
 
             ILRuntime.CLR.TypeSystem.CLRType __clrType = null;
         }

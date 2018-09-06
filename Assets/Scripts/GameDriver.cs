@@ -1,6 +1,8 @@
 ﻿using ILRuntime.Runtime.Enviorment;
 using System.Collections;
 using UnityEngine;
+using ILRuntime.CLR.TypeSystem;
+using ILRuntime.CLR.Method;
 
 public class GameDriver : MonoBehaviour
 {
@@ -52,7 +54,6 @@ public class GameDriver : MonoBehaviour
 
         using (System.IO.MemoryStream msDll = new System.IO.MemoryStream(dllBytes))
         {
-            //mAppDomain.LoadAssembly(msDll, null, null);
             using (System.IO.MemoryStream pdbDll = new System.IO.MemoryStream(pdbBytes))
             {
                 mAppDomain.LoadAssembly(msDll, pdbDll, new Mono.Cecil.Pdb.PdbReaderProvider());
@@ -63,9 +64,9 @@ public class GameDriver : MonoBehaviour
         OnRunGame();
     }
 
+
     private void InitILRunTime()
     {
-        //mAppDomain.RegisterValueTypeBinder(typeof(Vector3), new Vector3Binder());
         ILRuntime.Runtime.Generated.CLRBindings.Initialize(mAppDomain);
 
         //mAppDomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction>((action) =>
@@ -79,8 +80,28 @@ public class GameDriver : MonoBehaviour
         LitJson.JsonMapper.RegisterILRuntimeCLRRedirection(mAppDomain);
     }
 
+
+    private IMethod _upDateMethod;
+    private IMethod _quitMethod;
     private void OnRunGame()
     {
+        //预先获得IMethod，可以减低每次调用查找方法耗用的时间
+        IType type = mAppDomain.LoadedTypes["ClientLogic.GameEntry"];
+        _upDateMethod = type.GetMethod("Update", 0);
+        _quitMethod = type.GetMethod("ApplicationQuit", 0);
+
         mAppDomain.Invoke("ClientLogic.GameEntry", "RunGame", null, null);
+    }
+
+    private void Update()
+    {
+        if (_upDateMethod != null)
+            mAppDomain.Invoke(_upDateMethod, null, null);
+    }
+
+    private void OnApplicationQuit()
+    {
+        if (_quitMethod != null)
+            mAppDomain.Invoke(_quitMethod, null, null);
     }
 }
