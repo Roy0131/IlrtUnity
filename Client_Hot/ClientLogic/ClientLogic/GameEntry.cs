@@ -38,6 +38,7 @@
         public static void Update()
         {
             GameStageMgr.Instance.Update();
+            GameNetMgr.Instance.Update();
         }
 
         public static void ApplicationQuit()
@@ -50,6 +51,7 @@
         {
             GameConfigMgr.Instance.Init();
             GameUIMgr.Instance.Init();
+            GameNetMgr.Instance.Init();
             GameStageMgr.Instance.Init();
             GameStageMgr.Instance.ChangeStage(StageType.Login);
         }

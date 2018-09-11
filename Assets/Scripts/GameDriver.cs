@@ -14,6 +14,7 @@ public class GameDriver : MonoBehaviour
         Instance = this;
         Application.targetFrameRate = 30;
         DontDestroyOnLoad(gameObject);
+        gameObject.AddComponent<Loom>();
     }
 
     private void Start()
@@ -59,27 +60,10 @@ public class GameDriver : MonoBehaviour
                 mAppDomain.LoadAssembly(msDll, pdbDll, new Mono.Cecil.Pdb.PdbReaderProvider());
             }
         }
-        InitILRunTime();
+        ILHelper.InitILRunTime(mAppDomain);
         yield return new WaitForSeconds(0.5f);
         OnRunGame();
     }
-
-
-    private void InitILRunTime()
-    {
-        ILRuntime.Runtime.Generated.CLRBindings.Initialize(mAppDomain);
-
-        //mAppDomain.DelegateManager.RegisterDelegateConvertor<UnityEngine.Events.UnityAction>((action) =>
-        //{
-        //    return new UnityEngine.Events.UnityAction(() =>
-        //    {
-        //        ((System.Action)action).Invoke();
-        //    });
-        //});
-
-        LitJson.JsonMapper.RegisterILRuntimeCLRRedirection(mAppDomain);
-    }
-
 
     private IMethod _upDateMethod;
     private IMethod _quitMethod;

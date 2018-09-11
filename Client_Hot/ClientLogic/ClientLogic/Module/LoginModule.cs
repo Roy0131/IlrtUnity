@@ -31,6 +31,7 @@ namespace ClientLogic
             }
             HomeModule.TmpAccount = _accoutInput.text;
             GameStageMgr.Instance.ChangeStage(StageType.Home);
+            GameNetMgr.Instance.DoGameLogin(_accoutInput.text);
         }
     }
 }
